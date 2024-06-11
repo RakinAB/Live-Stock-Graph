@@ -19,7 +19,6 @@ def fetch_data(ticker):
     data['BB_upper'] = data['SMA'] + 2 * data['Close'].rolling(window=20).std()
     data['BB_lower'] = data['SMA'] - 2 * data['Close'].rolling(window=20).std()
     
-   
     return data
 
 # Function to create the plot
@@ -113,7 +112,7 @@ def create_plot(data, ticker):
     
     fig.update_layout(
         template='plotly_dark',
-        title=f'{ticker} Live Price',
+        title=f'{ticker} Live Price with Bollinger Bands and Volume',
         xaxis_title='Time',
         yaxis_title='Price',
         yaxis2_title='Volume',
@@ -136,10 +135,22 @@ app.layout = dbc.Container(
             )
         ),
         dbc.Row(
-            dbc.Col(
-                dcc.Graph(id='live-graph', style={'height': '100vh'}),
-                width=12
-            )
+            [
+                dbc.Col(
+                    dcc.Input(
+                        id='stock-input',
+                        type='text',
+                        placeholder='Enter stock ticker...',
+                        value='NVDA',
+                        debounce=True
+                    ),
+                    width=3
+                ),
+                dbc.Col(
+                    dcc.Graph(id='live-graph', style={'height': '100vh'}),
+                    width=12
+                )
+            ]
         ),
         dcc.Interval(
             id='interval-component',
@@ -152,11 +163,11 @@ app.layout = dbc.Container(
 )
 
 @app.callback(Output('live-graph', 'figure'),
-              Input('interval-component', 'n_intervals'))
-def update_graph_live(n):
-    ticker = 'NVDA'
-    data = fetch_data(ticker)
-    fig = create_plot(data, ticker)
+              [Input('interval-component', 'n_intervals'),
+               Input('stock-input', 'value')])
+def update_graph_live(n, selected_stock):
+    data = fetch_data(selected_stock)
+    fig = create_plot(data, selected_stock)
     return fig
 
 if __name__ == '__main__':
