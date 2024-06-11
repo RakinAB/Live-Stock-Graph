@@ -14,19 +14,19 @@ This is a web application built with Dash, allowing users to visualize live stoc
 
 **Installation**
 
-Clone the repository:
+1. Clone the repository:
 git clone https://github.com/your_username/live-stock-price-chart.git
 
-Install the required Python packages:
+2. Install the required Python packages:
 pip install -r requirements.txt
 
 
 **Usage**
 
-Run the Dash app:
+1. Run the Dash app:
 python app.py
-Open your web browser and go to http://127.0.0.1:8050/.
+2. Open your web browser and go to http://127.0.0.1:8050/.
 
-Enter the stock ticker symbol in the input field.
+3. Enter the stock ticker symbol in the input field.
 
-Explore the live stock price chart with Bollinger Bands and volume.
+4. Explore the live stock price chart with Bollinger Bands and volume.
