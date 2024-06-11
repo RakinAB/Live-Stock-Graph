@@ -9,6 +9,15 @@ import time
 
 # Function to fetch and process data
 def fetch_data(ticker):
+    """
+    Fetches historical stock data and calculates moving average, Bollinger Bands.
+
+    Args:
+    - ticker (str): Stock ticker symbol.
+
+    Returns:
+    - data (DataFrame): Processed stock data.
+    """
     # Fetch data
     data = yf.download(ticker, period='1d', interval='1m')
     
@@ -23,6 +32,16 @@ def fetch_data(ticker):
 
 # Function to create the plot
 def create_plot(data, ticker):
+    """
+    Creates a plot with candlestick, moving average, Bollinger Bands, and volume.
+
+    Args:
+    - data (DataFrame): Stock data.
+    - ticker (str): Stock ticker symbol.
+
+    Returns:
+    - fig (Plotly Figure): Plotly figure object.
+    """
     fig = make_subplots(rows=2, cols=1, shared_xaxes=True,
                         row_heights=[0.7, 0.3], vertical_spacing=0.1)
     
@@ -166,6 +185,16 @@ app.layout = dbc.Container(
               [Input('interval-component', 'n_intervals'),
                Input('stock-input', 'value')])
 def update_graph_live(n, selected_stock):
+    """
+    Updates the live graph based on the selected stock ticker symbol.
+
+    Args:
+    - n (int): Number of intervals (unused).
+    - selected_stock (str): Selected stock ticker symbol.
+
+    Returns:
+    - fig (Plotly Figure): Updated plotly figure object
+    """
     data = fetch_data(selected_stock)
     fig = create_plot(data, selected_stock)
     return fig
