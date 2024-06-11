@@ -2,7 +2,7 @@
 
 This is a web application built with Dash, allowing users to visualize live stock prices with Bollinger Bands and volume for any stock ticker symbol.
 
-**Features**
+*Features*
 - Live Updates: The chart is updated at regular intervals to display the latest stock data.
 - Customizable: Users can input any stock ticker symbol to view its live price chart.
 - Interactive: Users can zoom in, pan, and hover over data points to inspect details.
