@@ -6,6 +6,7 @@ from dash import Dash, dcc, html
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 import time
+import pytz
 
 # Function to fetch and process data
 def fetch_data(ticker):
@@ -20,6 +21,10 @@ def fetch_data(ticker):
     """
     # Fetch data
     data = yf.download(ticker, period='1d', interval='1m')
+
+    # Convert to local time zone
+    local_tz = pytz.timezone('America/Chicago')  # Replace with your local time zone
+    data.index = data.index.tz_convert(local_tz)
     
     # Calculate moving average
     data['SMA'] = data['Close'].rolling(window=20).mean()
