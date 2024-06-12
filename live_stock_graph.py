@@ -136,7 +136,7 @@ def create_plot(data, ticker):
     
     fig.update_layout(
         template='plotly_dark',
-        title=f'{ticker} Live Price with Bollinger Bands and Volume',
+        title=f'{ticker} Live Stock Prices',
         xaxis_title='Time',
         yaxis_title='Price',
         yaxis2_title='Volume',
